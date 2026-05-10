@@ -3,9 +3,13 @@ import express from 'express';
 import {
 
   register,
-  login
+  login,
+  getCurrentUser
 
 } from '../controllers/authController.js';
+
+import authMiddleware
+from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -30,6 +34,20 @@ router.post(
   '/login',
 
   login
+
+);
+
+/* =========================
+   GET CURRENT USER
+========================= */
+
+router.get(
+
+  '/me',
+
+  authMiddleware,
+
+  getCurrentUser
 
 );
 

@@ -3,7 +3,10 @@ import express from 'express';
 import {
 
   addProduct,
-  getProducts
+  getProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct
 
 } from '../controllers/productController.js';
 
@@ -44,6 +47,54 @@ router.get(
   authMiddleware,
 
   getProducts
+
+);
+
+/* =========================
+   GET SINGLE PRODUCT
+========================= */
+
+router.get(
+
+  '/:id',
+
+  authMiddleware,
+
+  getSingleProduct
+
+);
+
+/* =========================
+   UPDATE PRODUCT
+   ONLY EXPORTERS
+========================= */
+
+router.put(
+
+  '/:id',
+
+  authMiddleware,
+
+  roleMiddleware('exporter'),
+
+  updateProduct
+
+);
+
+/* =========================
+   DELETE PRODUCT
+   ONLY EXPORTERS
+========================= */
+
+router.delete(
+
+  '/:id',
+
+  authMiddleware,
+
+  roleMiddleware('exporter'),
+
+  deleteProduct
 
 );
 

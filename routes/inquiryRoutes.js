@@ -3,7 +3,10 @@ import express from 'express';
 import {
 
   sendInquiry,
-  getExporterInquiries
+  getExporterInquiries,
+  getImporterInquiries,
+  respondToInquiry,
+  getSingleInquiry
 
 } from '../controllers/inquiryController.js';
 
@@ -46,6 +49,54 @@ router.get(
   roleMiddleware('exporter'),
 
   getExporterInquiries
+
+);
+
+/* =========================
+   GET IMPORTER INQUIRIES
+   ONLY IMPORTERS
+========================= */
+
+router.get(
+
+  '/importer/:id',
+
+  authMiddleware,
+
+  roleMiddleware('importer'),
+
+  getImporterInquiries
+
+);
+
+/* =========================
+   RESPOND TO INQUIRY
+   ONLY EXPORTERS
+========================= */
+
+router.put(
+
+  '/:id',
+
+  authMiddleware,
+
+  roleMiddleware('exporter'),
+
+  respondToInquiry
+
+);
+
+/* =========================
+   GET SINGLE INQUIRY
+========================= */
+
+router.get(
+
+  '/:id',
+
+  authMiddleware,
+
+  getSingleInquiry
 
 );
 

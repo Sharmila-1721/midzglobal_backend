@@ -4,7 +4,10 @@ import {
 
   getPendingUsers,
   approveUser,
-  rejectUser
+  rejectUser,
+  getAllUsers,
+  deleteUser,
+  getAdminAnalytics
 
 } from '../controllers/adminController.js';
 
@@ -64,6 +67,57 @@ router.put(
   roleMiddleware('admin'),
 
   rejectUser
+
+);
+
+/* =========================
+   GET ALL USERS
+   ONLY ADMIN
+========================= */
+
+router.get(
+
+  '/users',
+
+  authMiddleware,
+
+  roleMiddleware('admin'),
+
+  getAllUsers
+
+);
+
+/* =========================
+   DELETE USER
+   ONLY ADMIN
+========================= */
+
+router.delete(
+
+  '/users/:id',
+
+  authMiddleware,
+
+  roleMiddleware('admin'),
+
+  deleteUser
+
+);
+
+/* =========================
+   ADMIN ANALYTICS
+   ONLY ADMIN
+========================= */
+
+router.get(
+
+  '/analytics',
+
+  authMiddleware,
+
+  roleMiddleware('admin'),
+
+  getAdminAnalytics
 
 );
 

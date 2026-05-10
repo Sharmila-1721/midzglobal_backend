@@ -5,7 +5,9 @@ import {
   createOrder,
   getImporterOrders,
   getExporterOrders,
-  getPendingShipmentOrders
+  getPendingShipmentOrders,
+  getSingleOrder,
+  updateOrderStatus
 
 } from '../controllers/orderController.js';
 
@@ -73,6 +75,37 @@ router.get(
   authMiddleware,
 
   getPendingShipmentOrders
+
+);
+
+/* =========================
+   GET SINGLE ORDER
+========================= */
+
+router.get(
+
+  '/:id',
+
+  authMiddleware,
+
+  getSingleOrder
+
+);
+
+/* =========================
+   UPDATE ORDER STATUS
+   ADMIN OR EXPORTER
+========================= */
+
+router.put(
+
+  '/:id',
+
+  authMiddleware,
+
+  roleMiddleware('admin', 'exporter'),
+
+  updateOrderStatus
 
 );
 
